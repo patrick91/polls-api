@@ -1,8 +1,9 @@
 import os
 
-from psycopg_pool import AsyncConnectionPool
+from psycopg_pool import AsyncNullConnectionPool
 
-pool = AsyncConnectionPool(
+
+pool = AsyncNullConnectionPool(
     os.environ["DATABASE_URL"],
     open=False,
 )
