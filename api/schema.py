@@ -1,5 +1,8 @@
 import strawberry
+from typing import Any
 from strawberry.types.info import Info
+
+from strawberry.directive import DirectiveLocation
 
 from .context import Context
 
@@ -127,8 +130,27 @@ class Mutation:
             return Poll(id=id, question=question[0])
 
 
+# a directive that adds some delay to a resolver
+@strawberry.directive(
+    description="Adds a delay to the resolver, useful for testing loading states",
+    locations=[DirectiveLocation.FIELD],
+)
+async def delay(
+    value: Any,
+    ms: int = 1000,
+) -> Any:
+    import asyncio
+
+    # sourcery skip: remove-unnecessary-cast
+    # this is due to a bug in Strawberry
+    await asyncio.sleep(int(ms) / 1000)
+
+    return value
+
+
 schema = strawberry.federation.Schema(
     Query,
     Mutation,
     enable_federation_2=True,
+    directives=[delay],
 )
