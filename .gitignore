@@ -1,0 +1,8 @@
+.pdm.toml
+.DS_Store
+__pycache__/
+.vscode/
+.virtualenv
+*.egg-info.pdm-python
+.env
+.pdm-python
