@@ -1,9 +1,10 @@
-import strawberry
 from typing import Any
+
+import strawberry
+from strawberry.directive import DirectiveLocation
 from strawberry.types.info import Info
 
-from strawberry.directive import DirectiveLocation
-
+from .auth.mutations import AuthMutation
 from .context import Context
 
 # TODO: use dataloaders
@@ -96,7 +97,7 @@ class Query:
 
 
 @strawberry.type
-class Mutation:
+class Mutation(AuthMutation):
     @strawberry.field
     async def answer_poll(
         self, id: strawberry.ID, answer_id: strawberry.ID, info: Info[Context, None]

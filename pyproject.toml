@@ -1,18 +1,19 @@
 [project]
-name = ""
-version = ""
-description = ""
 authors = [
-    {name = "Patrick Arminio", email = "patrick.arminio@gmail.com"},
+  {name = "Patrick Arminio", email = "patrick.arminio@gmail.com"},
 ]
 dependencies = [
-    "strawberry-graphql",
-    "fastapi",
-    "uvicorn",
-    "psycopg[pool]>=3.1.9",
+  "strawberry-graphql",
+  "fastapi",
+  "uvicorn",
+  "psycopg[pool]>=3.1.9",
+  "fastapi-sessions>=0.3.2",
 ]
-requires-python = ">=3.11"
+description = ""
 license = {text = "MIT"}
+name = ""
+requires-python = ">=3.11"
+version = ""
 
 [tool.black]
 line-length = 88
@@ -35,10 +36,14 @@ plugins = ["strawberry.ext.mypy_plugin"]
 dev = ["black", "flake8", "mypy", "pytest", "httpx"]
 
 [tool.pdm.scripts]
-start = "uvicorn main:app --host 0.0.0.0 --port 8080"
 dev.cmd = "uvicorn main:app --reload"
 dev.env_file = ".env"
+start = "uvicorn main:app --host 0.0.0.0 --port 8080"
+
+[tool.ruff]
+select = ["I", "E", "F"]
+fix = true
 
 [build-system]
-requires = ["pdm-backend"]
 build-backend = "pdm.backend"
+requires = ["pdm-backend"]
