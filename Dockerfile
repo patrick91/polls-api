@@ -1,5 +1,7 @@
 FROM python:3.11-slim
 
+ENV PORT=8000
+
 RUN apt update
 RUN apt install libpq5 -y
 RUN pip install -U pip setuptools wheel
@@ -12,7 +14,6 @@ COPY . /project
 WORKDIR /project
 RUN pdm install --prod --no-lock --no-editable
 
-EXPOSE 8080
 STOPSIGNAL SIGINT
 
 CMD ["pdm", "start"]

@@ -35,7 +35,7 @@ plugins = ["strawberry.ext.mypy_plugin"]
 dev = ["black", "flake8", "mypy", "pytest", "httpx"]
 
 [tool.pdm.scripts]
-start = "uvicorn main:app --host 0.0.0.0 --port 8080"
+start = "uvicorn main:app --host 0.0.0.0 --port $PORT"
 dev.cmd = "uvicorn main:app --reload"
 dev.env_file = ".env"
 
